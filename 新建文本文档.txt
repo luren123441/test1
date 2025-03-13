@@ -1,0 +1,135 @@
+// 从 '@ohos.router' 模块导入路由功能，用于页面间的导航
+import router from '@ohos.router';
+
+// 使用 @Entry 装饰器定义这个组件为应用的入口点之一
+@Entry
+  // 使用 @Component 装饰器定义这个结构体为一个UI组件
+@Component
+struct Second {
+  // 使用 @State 装饰器声明一个状态变量 message，初始值为 '这是第二页'
+  @State message: string = '这是第二页';
+
+  // build 方法是组件的构建方法，用于定义组件的UI结构
+  build() {
+    // 使用 Column 布局管理器来垂直排列子组件
+    Column() {
+      // 创建一个 Text 组件，显示当前的状态变量 message 的值
+      Text(this.message)
+        // 设置文本的字体大小为 50
+        .fontSize(50)
+          // 设置文本的字体粗细为 bold（加粗）
+        .fontWeight('bold')
+
+      // 创建一个 Button 组件，按钮上的文本为 '返回首页'
+      Button('返回上一页')
+        // 设置按钮上文本的字体大小为 30
+        .fontSize(30)
+          // 设置按钮上文本的字体粗细为 bold（加粗）
+        .fontWeight('bold')
+          // 设置按钮与上方组件之间的间距为 20 像素
+        .margin({ top: 20 })
+          // 设置按钮的背景颜色为 '#ff0d94fb'
+        .backgroundColor('#ff0d94fb')
+          // 设置按钮点击事件的处理函数
+        .onClick(() => {
+          // 使用 router.back 方法返回到上一个页面
+          router.pushUrl({
+            // 目标页面的 URL 路径
+            url: 'pages/Index',
+            // 传递给目标页面的参数对象，这里传递了一个 src 参数，值为 'index'
+            params: { src: 'index' }
+          })
+        })
+      //组件
+      LoadingProgress()
+        .color(Color.Red)
+    }
+    // 设置 Column 布局管理器的宽度为 100%，占据整个屏幕宽度
+    .width('100%')
+    // 设置 Column 布局管理器的高度为 100%，占据整个屏幕高度
+    .height('100%')
+  }
+}
+
+
+
+// 从 '@ohos.router' 模块导入路由功能，用于页面间的导航
+import router from '@ohos.router';
+
+// 使用 @Entry 装饰器定义这个组件为应用的入口点
+@Entry
+  // 使用 @Component 装饰器定义这个结构体为一个UI组件
+@Component
+struct Index {
+  // 使用 @State 装饰器声明一个状态变量 message，初始值为 '你好'
+  @State message: string = '你好';
+
+  // build 方法是组件的构建方法，用于定义组件的UI结构
+  build() {
+    // 使用 Column 布局管理器来垂直排列子组件
+    Column() {
+      //row组件
+      Row() {
+        Text('1111').fontSize(24)
+        Blank()
+        Text('3333').fontSize(24)
+      }
+      // Text 组件，显示当前的状态变量 message 的值
+      Text(this.message)
+        // 设置文本的字体大小为 50
+        .fontSize(50)
+          // 设置文本的字体粗细为 bold（加粗）
+        .fontWeight('bold')
+
+      // Button 组件，按钮上的文本为 '前往第二页'
+      Button('前往第二页')
+        // 设置按钮上文本的字体大小为 30
+        .fontSize(30)
+          // 设置按钮上文本的字体粗细为 bold（加粗）
+        .fontWeight('bold')
+          // 设置按钮与上方组件之间的间距为 20 像素
+        .margin({ top: 20 })
+          // 设置按钮的背景颜色为 '#ff0d94fb'
+        .backgroundColor('#ff0d94fb')
+          // 设置按钮点击事件的处理函数
+        .onClick(() => {
+          // 使用 router.pushUrl 方法跳转到指定的页面，并传递参数
+          router.pushUrl({
+            // 目标页面的 URL 路径
+            url: 'pages/Page2',
+            // 传递给目标页面的参数对象，这里传递了一个 src 参数，值为 'index'
+            params: { src: 'index' }
+          });
+        })
+      //datepicker组件
+      DatePicker({
+        start:new Date('1970-1-1'),//起始日期
+        end:new Date('2100-1-1'),//结束日期
+        selected: new Date('2025-3-13'),//默认日期
+      })
+      //滑动选择器组件
+      Divider()
+        .strokeWidth(5)//宽度
+        .color('#ff0dfbd7')//颜色
+      //checkbox组件
+      Checkbox({ name: 'checkbox1', group:'checkboxgroup'})
+        .select(true)//设置默认选中
+        .selectedColor('#fffb0d74')//颜色
+        .onChange((value: boolean) => {
+          console.info('Checkbox1 change is ' + value)
+        })
+
+      Checkbox({ name: 'checkbox2', group:'checkboxgroup'})
+        .select(false)
+        .selectedColor('#ff0dfb2d')
+        .onChange((value: boolean) => {
+          console.info('Checkbox2 change is ' + value)
+        })
+    }
+
+      // 设置 Column 布局管理器的宽度为 100%，占据整个屏幕宽度
+    .width('100%')
+    // 设置 Column 布局管理器的高度为 100%，占据整个屏幕高度
+    .height('100%')
+  }
+}
